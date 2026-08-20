@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>練習 05｜先猜再跑</title>
+  <style>
+    body {
+      font-family: system-ui, "Microsoft JhengHei", sans-serif;
+      max-width: 640px;
+      margin: 60px auto;
+      padding: 0 20px;
+      line-height: 1.7;
+    }
+
+    h1 {
+      font-size: 22px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 18px;
+      margin-right: 8px;
+    }
+
+    .hint {
+      color: #6B7280;
+      font-size: 14px;
+      margin-top: 40px;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>練習 05：先猜，再打開 Console</h1>
+  <p><b>先不要按按鈕。</b>先看下面的程式碼，在紙上寫下你猜第 1 顆會印出什麼，以及你這樣猜的理由。</p>
+
+  <button>第 1 顆</button>
+  <button>第 2 顆</button>
+  <button>第 3 顆</button>
+
+  <p class="hint">
+    猜完、寫完理由，才可以按。<br>
+    按完之後：「我以為會印出 X，但實際是 Y，我哪裡想錯了？」拿這句去問 AI。<br>
+    最後回到 Console，自己驗證一次 AI 的解釋成不成立。
+  </p>
+
+  <script>
+    const btns = document.querySelectorAll('button');
+
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        console.log('你按了第 ' + (i + 1) + ' 顆');
+      });
+    }
+  </script>
+</body>
+
+</html>
