@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>太陽系模型</title>
+
+    <!-- 製作邏輯：
+    1.抓出太陽(中心)
+    2.用太陽定位軌道
+    3.讓軌道旋轉
+    4.利用旋轉秒數的不同製造不同行星的轉入效果
+    5.抓出最內層的軌道與行星大小，其他直接複製放大 -->
+
+    <style>
+        /* 設定頁面背景與置中 */
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #060608;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* 整個舞台*/
+        .solar-system {
+            position: relative;
+            width: 700px;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 太陽本體 */
+        .sun {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #ffaa00;
+            border-radius: 50%;
+
+        }
+
+        /* 軌道 */
+        .orbit {
+            /* 讓所有軌道，全部以.solar-system 的正中心為基準重疊，形成「同心圓」。 */
+            position: absolute;
+           border: 1px solid rgb(255 255 255 / 30%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* 行星 */
+        .planet {
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+        }
+
+        /* ================= 軌道大小與動畫設定 ================= */
+
+        /* 偷懶大法：
+        1.先抓出第一個星與軌道大小
+        2.後面改數字放大星球與軌道
+        3. animation時間微調做效果 */
+
+        /* 太陽系的九大行星由內而外依序為：水星mercury、金星venus、地球earth、火星mars、木星jupiter、土星saturn、天王星uranus、海王星neptune、冥王星pluto。 */
+
+        /* 水星 */
+        .mercury-orbit {
+            width: 100px;
+            height: 100px;
+            animation: spin 2s linear infinite;
+        }
+
+        .mercury {
+            width: 8px;
+            height: 8px;
+            background-color: #aaaaaa;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 金星 */
+        .venus-orbit {
+            width: 150px;
+            height: 150px;
+            animation: spin 3.5s linear infinite;
+        }
+
+        .venus {
+            width: 12px;
+            height: 12px;
+            background-color: #e3bb76;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        /* 地球 */
+        .earth-orbit {
+            width: 210px;
+            height: 210px;
+            animation: spin 5s linear infinite;
+        }
+
+        .earth {
+            width: 14px;
+            height: 14px;
+            background-color: #2277ff;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        /* 火星 */
+        .mars-orbit {
+            width: 280px;
+            height: 280px;
+            animation: spin 7s linear infinite;
+        }
+
+        .mars {
+            width: 10px;
+            height: 10px;
+            background-color: #cc4400;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        /* 木星 */
+        .jupiter-orbit {
+            width: 370px;
+            height: 370px;
+            animation: spin 12s linear infinite;
+        }
+
+        .jupiter {
+            width: 24px;
+            height: 24px;
+            background-color: #d4a373;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        /* 土星 */
+        .saturn-orbit {
+            width: 460px;
+            height: 460px;
+            animation: spin 16s linear infinite;
+        }
+
+        .saturn {
+            width: 20px;
+            height: 20px;
+            background-color: #e5c158;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        /* 天王星 */
+        .uranus-orbit {
+            width: 540px;
+            height: 540px;
+            animation: spin 20s linear infinite;
+        }
+
+        .uranus {
+            width: 16px;
+            height: 16px;
+            background-color: #76d7c4;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 海王星 */
+        .neptune-orbit {
+            width: 620px;
+            height: 620px;
+            animation: spin 24s linear infinite;
+        }
+
+        .neptune {
+            width: 16px;
+            height: 16px;
+            background-color: #2980b9;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 冥王星 */
+        .pluto-orbit {
+            width: 680px;
+            height: 680px;
+            animation: spin 30s linear infinite;
+        }
+
+        .pluto {
+            width: 6px;
+            height: 6px;
+            background-color: #b0c4de;
+            transform: translate(-50%, -50%);
+        }
+
+        /* =================@keyframes 旋轉動畫================ */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="solar-system">
+        <!-- 太陽 -->
+        <div class="sun"></div>
+
+        <!-- 水星軌道與行星 -->
+        <div class="orbit mercury-orbit">
+            <div class="planet mercury"></div>
+        </div>
+
+        <!-- 金星軌道與行星 -->
+        <div class="orbit venus-orbit">
+            <div class="planet venus"></div>
+        </div>
+
+        <!-- 地球軌道與行星 -->
+        <div class="orbit earth-orbit">
+            <div class="planet earth"></div>
+        </div>
+
+        <!-- 火星軌道與行星 -->
+        <div class="orbit mars-orbit">
+            <div class="planet mars"></div>
+        </div>
+
+        <!-- 木星軌道與行星 -->
+        <div class="orbit jupiter-orbit">
+            <div class="planet jupiter"></div>
+        </div>
+
+        <!-- 土星軌道與行星 -->
+        <div class="orbit saturn-orbit">
+            <div class="planet saturn"></div>
+        </div>
+
+        <!-- 天王星軌道與行星 -->
+        <div class="orbit uranus-orbit">
+            <div class="planet uranus"></div>
+        </div>
+
+        <!-- 海王星軌道與行星 -->
+        <div class="orbit neptune-orbit">
+            <div class="planet neptune"></div>
+        </div>
+
+        <!-- 冥王星軌道與行星 -->
+        <div class="orbit pluto-orbit">
+            <div class="planet pluto"></div>
+        </div>
+    </div>
+</body>
+
+</html>
