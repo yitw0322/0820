@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>練習 01｜讀懂錯誤訊息</title>
+  <style>
+    body {
+      font-family: system-ui, "Microsoft JhengHei", sans-serif;
+      max-width: 640px;
+      margin: 60px auto;
+      padding: 0 20px;
+      line-height: 1.7;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    input,
+    button {
+      font-size: 1rem;
+      padding: 8px 12px;
+      margin-right: 8px;
+    }
+
+    #out {
+      margin-top: 20px;
+      font-size: 1.25rem;
+      color: #0B8A5F;
+      font-weight: bold;
+    }
+
+    .hint {
+      font-size: 1.25rem;
+      margin-top: 40px;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>練習 01：這個按鈕按不動</h1>
+  <p>輸入名字後按送出，應該要顯示「你好，○○○」。但它壞掉了。</p>
+
+  <label for="name">名字：</label>
+  <input id="name" type="text" placeholder="你的名字">
+  <button id="submit" type="button">送出</button>
+
+  <div id="out"></div>
+
+  <p class="hint">
+    撞牆 8 分鐘規則：只准開 F12 的 Console 和 Elements。<br>
+    不准 Google、不准開 AI。時間到就停，不管解出來沒有。<br>
+    結束時在紙上寫一句：<b>「我猜問題出在 ______」</b>
+  </p>
+  <script>
+    // ⚠️ 不要動這裡的程式碼內容，先找出「為什麼會壞」
+    const btn = document.querySelector('#submit');
+
+    btn.addEventListener('click', function () {
+      const name = document.querySelector('#name').value;
+      document.querySelector('#out').textContent = '你好，' + name;
+    });
+  </script>
+</body>
+
+</html>
